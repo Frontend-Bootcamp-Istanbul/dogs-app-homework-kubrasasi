@@ -1,26 +1,68 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Header() {
-    return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container">
-                    <a className="navbar-brand" href="#">Pets</a>
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">HomePage</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/favoriler">Favoriler</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    );
-}
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText,
+} from "reactstrap";
+import navs from "../navs";
+
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+  return (
+    <div>
+      <Navbar color="light" light expand="md">
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            {/*                        {
+                            navs.map((route) => {
+                                return <NavItem key={route.path}>
+                                    <NavLink>
+                                        <Link to={route.path}>
+                                            {route.title}
+                                        </Link>
+                                    </NavLink>
+                                </NavItem>
+                            })
+                        }*/}
+            <NavItem>
+              <NavLink>
+                <Link to="/">Anasayfa</Link>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>
+                <Link to="/hakkinda">Hakkimizda</Link>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>
+                <Link to="/tur/golden-retriever">Goldens</Link>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>
+                <Link to="/tur/cavalier-king-charles-spaniel">Cavalier</Link>
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
+  );
+};
 
 export default Header;
